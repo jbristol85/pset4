@@ -27,16 +27,16 @@ int main(int argc, char *argv[])
     // char *outptr = "jpegName.jpg";
 
 
-    while(fread(buffer, 1, 512, inptr) == 512) // will return 512(number) if true
+    while (fread(buffer, 1, 512, inptr) == 512) // will return 512(number) if true
     {
-        if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff &&(buffer[3] & 0xf0) == 0xe0)  // check for start of JPEG
+        if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0) // check for start of JPEG
         {
-            if(jpegName == 0)
+            if (jpegName == 0)
             {
                 sprintf(tempname, "%03i.jpg",  jpegName);
                 img = fopen(tempname, "w");
-                 fwrite(buffer, 1, 512, img);
-                 jpegName++;
+                fwrite(buffer, 1, 512, img);
+                jpegName++;
 
             }
             else
@@ -51,8 +51,10 @@ int main(int argc, char *argv[])
         }
         else
         {
-            if(img != NULL)
+            if (img != NULL)
+            {
             fwrite(buffer, 1, 512, img);
+            }
         }
 
     };
