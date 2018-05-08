@@ -31,21 +31,21 @@ int main(int argc, char *argv[])
     {
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0) // check for start of JPEG
         {
-            if (jpegName == 0)
+            if (jpegName == 0) //checks to see if it is the first img
             {
-                sprintf(tempname, "%03i.jpg",  jpegName);
-                img = fopen(tempname, "w");
-                fwrite(buffer, 1, 512, img);
-                jpegName++;
+                sprintf(tempname, "%03i.jpg",  jpegName);  // creates a formated string of data
+                img = fopen(tempname, "w");  // opens the img file and makes it writeable
+                fwrite(buffer, 1, 512, img);  // writes the buffer data to the img file
+                jpegName++;  // increments the jpeg number
 
             }
-            else
+            else  // if not the first img
             {
-                fclose(img);
-                sprintf(tempname, "%03i.jpg",  jpegName);
-                img = fopen(tempname, "w");
-                fwrite(buffer, 1, 512, img);
-                jpegName++;
+                fclose(img);  // close the previous file
+                sprintf(tempname, "%03i.jpg",  jpegName);  // creates a formated string of data
+                img = fopen(tempname, "w");  // opens the img file and makes it writeable
+                fwrite(buffer, 1, 512, img);  // writes the buffer data to the img file
+                jpegName++;  // increments the jpeg number
 
             }
         }
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
         }
 
     };
-    fclose(img);
+    fclose(img);  // closes the last img file
 }
 
 // Open card file
